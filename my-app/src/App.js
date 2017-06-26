@@ -28,6 +28,8 @@ class App extends Component {
       isHover: false,
       nuggets: 0,
       isAutoClick: false,
+      message: "Get to work mining!",
+      miningPower: 1
     };
     // this.JNUG = this.JNUG.bind(this);
     // this.autoClickSetup = this.autoClickSetup.bind(this);
@@ -44,9 +46,52 @@ class App extends Component {
   }
   JNUG = () =>
   {
-    this.setState({
-      nuggets: this.state.nuggets + 1
-    })
+    if(this.state.nuggets > 5 && this.state.miningPower < 2)
+    {
+      this.setState({
+        miningPower: this.state.miningPower + 1,
+        nuggets: this.state.nuggets + this.state.miningPower,
+        message: "You have unlocked a 2x leveraged pickaxe!"
+      })
+    }
+    else if(this.state.nuggets > 50 && this.state.miningPower < 3)
+    {
+      this.setState({
+        miningPower: this.state.miningPower + 1,
+        nuggets: this.state.nuggets + this.state.miningPower,
+        message: "You have unlocked a 3x leveraged pickaxe!"
+      })
+    }
+    else if(this.state.nuggets > 150 && this.state.miningPower < 4)
+    {
+      this.setState({
+        miningPower: this.state.miningPower + 1,
+        nuggets: this.state.nuggets + this.state.miningPower,
+        message: "You have unlocked a 4x leveraged pickaxe!"
+      })
+    }
+    else if(this.state.nuggets > 300 && this.state.miningPower < 5)
+    {
+      this.setState({
+        miningPower: this.state.miningPower + 1,
+        nuggets: this.state.nuggets + this.state.miningPower,
+        message: "You have unlocked a 5x leveraged pickaxe!"
+      })
+    }
+    else if(this.state.nuggets > 1000 && this.state.miningPower < 10)
+    {
+      this.setState({
+        miningPower: 10,
+        nuggets: this.state.nuggets + this.state.miningPower,
+        message: "You have unlocked a 10x leveraged pickaxe!"
+      })
+    }
+    else
+    {
+      this.setState({
+        nuggets: this.state.nuggets + this.state.miningPower 
+      })
+    }
   }
 
   render() {
@@ -75,7 +120,7 @@ class App extends Component {
         <br />
         <span style={NuggetStyle}> Nuggets Mined: {this.state.nuggets} </span>
         <br />
-        <span> {this.state.message} </span>
+        <span style={NuggetStyle}> {this.state.message} </span>
       </div>
     );
   }
