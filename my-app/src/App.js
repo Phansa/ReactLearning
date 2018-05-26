@@ -115,7 +115,7 @@ class App extends Component {
       at <a href="https://www.reddit.com/r/wallstreetbets/">Wallstreet Bets</a>. <br/>
       <span style={NuggetStyle}> You can claim your free prize (a stock worth around $3 on average) 
       by using my Robinhood referral <a href="http://share.robinhood.com/adeetp"> 
-      link </a>. </span>
+      link </a>. <br /> </span>
       <span style={NuggetStyle}>Robinhood is a trading platform with zero 
       comissions or hidden fees giving you more freedom to trade on your own terms! </span>
       </span>
