@@ -5,21 +5,16 @@ const world = <h1 style={{ color: "blue"}}>Hello, World</h1>;
 const mars = <h1 style={{ color: "gray"}}>Hello, Moon</h1>;
 
 const starting_message = <h1> Hover over me to go to the moon! </h1>;
-const next_message = <h1> Good Job! <span aria-label="rocket" role="img"> 🚀🚀🚀 </span></h1>
+const next_message = <h1> Good Job! Buy $AMD to continue this moon trip. <span aria-label="rocket" role="img"> 🚀🚀🚀 </span></h1>
 
-const RockStyle =
-{
-    width: "300px",
-    height: "300px",
-    cursor: "url(http://www.rw-designer.com/cursor-extern.php?id=30247), auto",
-}
 const NuggetStyle =
 {
-  "margin-left": "100px"
+  "marginLeft": "100px"
 }
 
 class App extends Component {
 
+  //Pickaxe css taken from - http://www.rw-designer.com/cursor-extern.php?id=30247
   constructor()
   {
     super();
@@ -28,12 +23,26 @@ class App extends Component {
       isHover: false,
       nuggets: 0,
       isAutoClick: false,
-      message: "Get to work mining!",
-      miningPower: 1
-    };
-    // this.JNUG = this.JNUG.bind(this);
-    // this.autoClickSetup = this.autoClickSetup.bind(this);
+      message: "Get to work mining! Click the rock to get started!",
+      miningPower: 1,
+      style: {width: "300px", height: "300px", cursor: "diamondPickaxe.cur"}
+    }
+    this.rockStyle = this.rockStyle.bind(this);
+    this.processKey = this.processKey.bind(this);
   }
+
+  componentWillMount = () =>
+  {
+    document.addEventListener("keydown", this.processKey, false);
+    this.setState({
+      style: this.rockStyle("diamondPickaxe.cur")
+    })
+  }
+
+  componentWillUnmount(){
+    document.removeEventListener("keydown", this.processKey, false);
+  }
+
   handleMouseOver = () => {
       this.setState({
           isHover: true
@@ -44,6 +53,15 @@ class App extends Component {
           isHover: false
       });
   }
+  rockStyle = (url) =>
+  {
+    let cursorString = "url(" + url + "), auto";
+    return{
+      width: "300px",
+      height: "300px",
+      cursor: cursorString,
+    }
+  }
   JNUG = () =>
   {
     if(this.state.nuggets > 5 && this.state.miningPower < 2)
@@ -51,7 +69,8 @@ class App extends Component {
       this.setState({
         miningPower: this.state.miningPower + 1,
         nuggets: this.state.nuggets + this.state.miningPower,
-        message: "You have unlocked a 2x leveraged pickaxe!"
+        message: "You have unlocked a 2x leveraged pickaxe!",
+        style: this.rockStyle("doubleDiamondPickaxe.cur")
       })
     }
     else if(this.state.nuggets > 50 && this.state.miningPower < 3)
@@ -59,7 +78,8 @@ class App extends Component {
       this.setState({
         miningPower: this.state.miningPower + 1,
         nuggets: this.state.nuggets + this.state.miningPower,
-        message: "You have unlocked a 3x leveraged pickaxe!"
+        message: "You have unlocked a 3x leveraged pickaxe!",
+        style: this.rockStyle("tripleDiamondPickaxe.cur")
       })
     }
     else if(this.state.nuggets > 150 && this.state.miningPower < 4)
@@ -67,7 +87,8 @@ class App extends Component {
       this.setState({
         miningPower: this.state.miningPower + 1,
         nuggets: this.state.nuggets + this.state.miningPower,
-        message: "You have unlocked a 4x leveraged pickaxe!"
+        message: "You have unlocked a 4x leveraged pickaxe!",
+        style: this.rockStyle("quadrupleDiamondPickaxe.cur")
       })
     }
     else if(this.state.nuggets > 300 && this.state.miningPower < 5)
@@ -75,7 +96,8 @@ class App extends Component {
       this.setState({
         miningPower: this.state.miningPower + 1,
         nuggets: this.state.nuggets + this.state.miningPower,
-        message: "You have unlocked a 5x leveraged pickaxe!"
+        message: "You have unlocked a 5x leveraged pickaxe!",
+        style: this.rockStyle("quintupleDiamondPickaxe.cur")
       })
     }
     else if(this.state.nuggets > 1000 && this.state.miningPower < 10)
@@ -83,7 +105,17 @@ class App extends Component {
       this.setState({
         miningPower: 10,
         nuggets: this.state.nuggets + this.state.miningPower,
-        message: "You have unlocked a 10x leveraged pickaxe!"
+        message: "You have unlocked a 9x leveraged pickaxe!",
+        style: this.rockStyle("nonupleDiamondPickaxe.cur")
+      })
+    }
+    else if(this.state.nuggets > 1500)
+    {
+      const messageGameWin = <span> You win! Please continue the adventure over at &nbsp;
+      <a href="https://www.reddit.com/r/wallstreetbets/">Wallstreet Bets</a>. </span>
+      this.setState({
+        nuggets: this.state.nuggets + this.state.miningPower,
+        message: messageGameWin
       })
     }
     else
@@ -93,7 +125,13 @@ class App extends Component {
       })
     }
   }
-
+  processKey(event)
+  {
+    if(event.keyCode === 32)
+    {
+      this.JNUG();
+    }
+  }
   render() {
     const isHover = this.state.isHover;
     let cur_element = null;
@@ -115,7 +153,7 @@ class App extends Component {
           {cur_message}
         </div>
         <h1> Help the Direxion Daily Junior Gold Miners mine for gold! </h1>
-        <img src={GoldRock} style={RockStyle} onClick={this.JNUG} draggable="false" alt="Gold Rock" />
+        <img src={GoldRock} style={this.state.style} onClick={this.JNUG} draggable="false" alt="Gold Rock" />
         <br />
         <br />
         <span style={NuggetStyle}> Nuggets Mined: {this.state.nuggets} </span>
