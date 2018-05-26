@@ -5,7 +5,7 @@ const world = <h1 style={{ color: "blue"}}>Hello, World</h1>;
 const mars = <h1 style={{ color: "gray"}}>Hello, Moon</h1>;
 
 const starting_message = <h1> Hover over me to go to the moon! </h1>;
-const next_message = <h1> Good Job! Buy $AMD to continue this moon trip. <span aria-label="rocket" role="img"> 🚀🚀🚀 </span></h1>
+const next_message = <h1> Good Job! Buy $MU to continue this muun trip. <span aria-label="rocket" role="img"> 🚀🚀🚀 </span></h1>
 
 const NuggetStyle =
 {
@@ -111,8 +111,14 @@ class App extends Component {
     }
     else if(this.state.nuggets > 1500)
     {
-      const messageGameWin = <span> You win! Please continue the adventure over at &nbsp;
-      <a href="https://www.reddit.com/r/wallstreetbets/">Wallstreet Bets</a>. </span>
+      const messageGameWin = <span> You win! Please continue the adventure over 
+      at <a href="https://www.reddit.com/r/wallstreetbets/">Wallstreet Bets</a>. <br/>
+      <span style={NuggetStyle}> You can claim your free prize (a stock worth around $3 on average) 
+      by using my Robinhood referral <a href="http://share.robinhood.com/adeetp"> 
+      link </a>. </span>
+      <span style={NuggetStyle}>Robinhood is a trading platform with zero 
+      comissions or hidden fees giving you more freedom to trade on your own terms! </span>
+      </span>
       this.setState({
         nuggets: this.state.nuggets + this.state.miningPower,
         message: messageGameWin
