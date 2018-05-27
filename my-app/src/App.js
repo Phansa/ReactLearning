@@ -112,7 +112,7 @@ class App extends Component {
     else if(this.state.nuggets > 1500)
     {
       const messageGameWin = <span> You win! Please continue the adventure over 
-      at <a href="https://www.reddit.com/r/wallstreetbets/">Wallstreet Bets</a>. <br/>
+      at <a href="https://www.reddit.com/r/personalfinance/">Personal Finance</a>. <br/>
       <span style={NuggetStyle}> You can claim your free prize (a stock worth around $3 on average) 
       by using my Robinhood referral <a href="http://share.robinhood.com/adeetp"> 
       link </a>. <br /> </span>
