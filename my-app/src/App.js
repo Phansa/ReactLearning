@@ -103,7 +103,7 @@ class App extends Component {
     else if(this.state.nuggets > 1000 && this.state.miningPower < 10)
     {
       this.setState({
-        miningPower: 10,
+        miningPower: 9,
         nuggets: this.state.nuggets + this.state.miningPower,
         message: "You have unlocked a 9x leveraged pickaxe!",
         style: this.rockStyle("nonupleDiamondPickaxe.cur")
